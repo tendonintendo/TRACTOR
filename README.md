@@ -7,8 +7,8 @@ The core of this research was inspired by the **SPOJ TRACTOR** competitive progr
 
 ## Contents
 * **src/solution.cpp**: A high-performance C++ implementation that serves as a direct solution to the SPOJ TRACTOR problem. It utilizes the greedy decomposition and permutative matching algorithms described in the paper.
-* **latex/main.tex**: The source LaTeX for the academic paper titled *"Deterministic Isomorphic Validation of Composite Card Structures in Non-Monotonic Rank Hierarchies"*.
-* **latex/algorithms/**: Modular LaTeX files containing the pseudocode for the rank mapping, decomposition, and matching engines.
+* **latex/main.tex**: The source LaTeX for the academic paper titled *"Deterministic Isomorphic Validation of Composite Card Structures in Non-Monotonic Rank Hierarchies"* which takes inspiration from the implementation of the C++ implementation.
+* **latex/main.pdf**: The academic paper titled *"Deterministic Isomorphic Validation of Composite Card Structures in Non-Monotonic Rank Hierarchies"*.
 
 ## Theoretical Overview
 The project addresses two primary computational hurdles:
