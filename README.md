@@ -5,6 +5,7 @@ This repository contains the formal mathematical framework and high-performance 
 ## Inspiration
 The core of this research was inspired by the [**SPOJ TRACTOR**](https://www.spoj.com/problems/TRACTOR/) competitive programming problem. The challenge involves resolving structural ambiguity in card plays where simple greedy matching often fails. This project formalizes a robust solution by treating the validation of "Throws" (composite plays) as a problem of isomorphic structural consistency under non-monotonic rank constraints. The provided source code serves as a verified solution to the SPOJ challenge.
 
+**Verification:** My successful submission and profile can be viewed here: [**rengga_f_101 on SPOJ**](https://www.spoj.com/users/rengga_f_101/)
 ## Contents
 * **src/solution.cpp**: A high-performance C++ implementation that serves as a direct solution to the SPOJ TRACTOR problem. It utilizes the greedy decomposition and permutative matching algorithms described in the paper.
 * **latex/main.tex**: The source LaTeX for the academic paper titled *"Deterministic Isomorphic Validation of Composite Card Structures in Non-Monotonic Rank Hierarchies"* which takes inspiration from the implementation of the C++ implementation.
