@@ -20,7 +20,7 @@
 
 \geometry{margin=1in}
 
-\title{\textbf{Structural Validation in Discontinuous Rank-Spaces: A Permutative Approach to Bounded Multi-Sets}}
+\title{\textbf{Deterministic Isomorphic Validation of Composite Card Structures in Non-Monotonic Rank Hierarchies}}
 \author{Muhammad Rengga Putra Kuncoro}
 \date{January 2026}
 
@@ -35,13 +35,16 @@ This paper presents a deterministic algorithmic framework for validating structu
 \section{Introduction}
 Trick-taking games typically rely on static, linear card rankings. However, complex combinatorial games such as Tractor (Sheng Ji) introduce dynamic hierarchies that reorder the deck based on a floating Current Rank ($CR$). This creates a non-linear state space that complicates both the validation of legal plays and the resolution of trick outcomes. 
 
-A significant challenge in these environments is the enforcement of \textit{isomorphic adherence}, where subsequent players must match the lead's structural composition (comprising singles, pairs, and sequential tractors) even as the underlying rank values shift. This paper defines a formal method for verifying these plays by:
+A significant challenge in these environments is the enforcement of \textit{isomorphic adherence}, where subsequent players must match the lead's structural composition (comprising singles, pairs, and sequential tractors) even as the underlying rank values shift. This research was inspired by the \texttt{TRACTOR} challenge on the Sphere Online Judge (SPOJ) platform, which highlights the structural ambiguities inherent in such rulesets.
+
+This paper defines a formal method for verifying these plays by:
 \begin{enumerate}[label=\roman*.]
     \item Transforming the irregular, discontinuous rank-space into a normalized, continuous integer domain ($\Phi$) for efficient adjacency verification.
     \item Implementing a greedy structural deconstruction engine that decomposes complex plays into their constituent primitives.
     \item Applying a permutative matching algorithm to verify structural isomorphism between the lead's requirements and the follower's hand.
 \end{enumerate}
-This integrated framework allows for rigorous rule enforcement and dominance evaluation in multi-deck environments with bounded multiplicity.
+
+This integrated framework\footnote{The complete C++ implementation and documented \LaTeX\ source are available at: \texttt{https://github.com/tendonintendo/TRACTOR}} allows for rigorous rule enforcement and dominance evaluation in multi-deck environments with bounded multiplicity.
 
 \section{Game Preliminaries and Definitions}
 To provide a basis for algorithmic validation, the rules of the environment must be formalized as a set of structural constraints. We define the game state through deck composition, rank hierarchy, and the requirements for isomorphic adherence.
@@ -115,8 +118,6 @@ Let $p(c)$ be the raw precedence of a card rank based on the set $\{2, 3, \dots,
     \end{itemize}
 \end{enumerate}
 
-
-
 \subsubsection{Algorithmic Implementation}
 The following algorithm illustrates the normalization of card values, ensuring $O(1)$ adjacency verification across suit boundaries and rank displacements.
 
@@ -164,8 +165,6 @@ By iterating through $S_n$, the algorithm ensures that if there is any possible 
 \section{Algorithmic Verification}
 \subsection{Maximal Structural Decomposition}
 The validation of a composite play (a ``Throw'') requires reducing a multiset of cards $C$ into its most significant structural components. This is achieved through a \textbf{Greedy Descending Decomposition} algorithm. This approach is necessitated by the \textbf{unidirectional recursive nature} of the structural matching problem: while a higher-order primitive (e.g., a Tractor) can be decomposed to satisfy lower-order requirements (Pairs or Singles) during the validation phase, the inverse is logically impossible. Therefore, the lead template must be defined by its maximal possible primitives to establish the absolute ``upper bound'' of structural strictness for the trick.
-
-
 
 Formally, the decomposition partitions $C$ into three disjoint sets:
 \[ C = \mathcal{P}_{T} \cup \mathcal{P}_{P} \cup \mathcal{P}_{S} \]
@@ -259,8 +258,6 @@ The function \texttt{sameStructure} operates as a \textbf{Recursive Backtracking
 \caption{Recursive degradation logic for a single structural requirement $b_i$. If no exact match exists, the system attempts to decompose higher-order primitives (Tractors) before triggering a backtrack to explore alternative permutations of the requirements.}
 \end{figure}
 
-
-
 \begin{enumerate}[label=\arabic*.]
     \item \textbf{Search Space and Permutation Reset:} The algorithm iterates through permutations of the lead's template $\mathcal{B}_L$. For each new permutation $\sigma \in S_n$, the follower's card pool is \textbf{fully restored to its original state}. This ensures that every ordering of requirements—from most specific (Tractors) to most general (Singles)—is tested against a complete resource set.
     
@@ -275,8 +272,6 @@ The function \texttt{sameStructure} operates as a \textbf{Recursive Backtracking
     
     \item \textbf{Existence Check:} If any branch of the recursion successfully satisfies all $n$ requirements, the existence criterion is met, the play is marked \textbf{Conforming}, and the search terminates immediately.
 \end{enumerate}
-
-
 
 This recursive approach ensures that the algorithm handles the ``25 Singles'' case and complex ``Tractor'' throws with equal precision. While the former involves a high $n$, the structural homogeneity of the blocks allows the recursion to find a valid path in the first branch, effectively reducing the computational burden to a linear pass $O(M)$.
 
@@ -363,8 +358,6 @@ The decomposition of a play $C$ into its requirement multiset $\mathcal{B}_L$ is
 \subsubsection*{Computational Overhead and Domain Sorting}
 The total complexity for template generation is $O(M \log M)$, dominated by the sequence sorting phase. While a naive approach to identifying maximal contiguous sequences (Tractors) in a multiset could result in a $O(2^M)$ subset search, the implementation of a standard sort in the normalized domain $\Phi$ transforms the problem into a linear scan.
 
-
-
 \begin{table}[H]
 \centering
 \caption{Algorithmic Complexity of Decomposition Phases}
@@ -386,11 +379,7 @@ This pre-processing ensures that the decomposition engine (\texttt{getStructure}
 \subsection{Physical Bounds and Permutative Search}
 The search space for structural validation, $|S_n| = n!$, is governed by the number of structural blocks $n$. Formally, the problem of finding a valid mapping between $P_F$ and $\mathcal{B}_L$ under structural degradation is a variation of the \textbf{Multiset Partitioning Problem}, which is known to be \textbf{NP-hard}. In a generalized environment where $M \to \infty$ and card multiplicity $k$ is unbounded, the number of ways to partition $P_F$ to satisfy $\mathcal{B}_L$ grows exponentially.
 
-
-
 However, the specific implementation in Tractor operates within a \textbf{bounded parameter space}. Although the theoretical card limit per suit partition is $M=25$, the number of \textit{distinct} structural blocks $n$ is physically constrained by the deck's multiplicity ($k=2$) and the greedy compression of Tractors during decomposition.
-
-
 
 Even in highly complex ``Mixed Plays'' where $n$ might approach 10, the computational overhead remains insignificant. As shown in Table 4, the search space for $n=10$ is roughly $3.6 \times 10^6$ permutations, a task modern CPUs resolve in milliseconds.
 
@@ -473,7 +462,7 @@ This diagram represents the search space for a lead of $n=3$ blocks. If a specif
 \begin{thebibliography}{9}
 
 \bibitem{tractor_rules}
-SphereOJ. \emph{TRACTOR - Game Simulator}. [Online]. Available: \url{https://www.spoj.com/problems/TRACTOR/}.
+Sphere Online Judge. \emph{TRACTOR - Game Simulator}. [Online]. Available: \url{https://www.spoj.com/problems/TRACTOR/}.
 
 \bibitem{garey_johnson}
 M. R. Garey and D. S. Johnson. \emph{Computers and Intractability: A Guide to the Theory of NP-Completeness}. W. H. Freeman, 1979. \textit{(Reference for Multiset Partitioning and Exact Cover)}.
