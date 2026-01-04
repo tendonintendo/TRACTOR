@@ -28,7 +28,7 @@ The provided source code implements the following logic:
 
 
 ## Requirements
-* **C++ Compiler**: A compiler supporting C++11 or higher (e.g., `g++` or `clang++`).
+* **C++ Compiler**: A compiler supporting C++8.3 or higher (e.g., `g++` or `clang++`).
 * **LaTeX Distribution**: `TeX Live` or `MiKTeX` with the `algorithm2e` and `amsmath` packages for compiling the paper documentation.
 
 ## Compilation and Usage
