@@ -3,7 +3,7 @@
 This repository contains the formal mathematical framework and high-performance C++ implementation for validating complex structural plays in multi-deck trick-taking games. 
 
 ## Inspiration
-The core of this research was inspired by the **SPOJ TRACTOR** competitive programming problem. The challenge involves resolving structural ambiguity in card plays where simple greedy matching often fails. This project formalizes a robust solution by treating the validation of "Throws" (composite plays) as a problem of isomorphic structural consistency under non-monotonic rank constraints. The provided source code serves as a verified solution to the SPOJ challenge.
+The core of this research was inspired by the [**SPOJ TRACTOR**](https://www.spoj.com/problems/TRACTOR/) competitive programming problem. The challenge involves resolving structural ambiguity in card plays where simple greedy matching often fails. This project formalizes a robust solution by treating the validation of "Throws" (composite plays) as a problem of isomorphic structural consistency under non-monotonic rank constraints. The provided source code serves as a verified solution to the SPOJ challenge.
 
 ## Contents
 * **src/solution.cpp**: A high-performance C++ implementation that serves as a direct solution to the SPOJ TRACTOR problem. It utilizes the greedy decomposition and permutative matching algorithms described in the paper.
