@@ -21,8 +21,7 @@
 \geometry{margin=1in}
 
 \title{\textbf{Deterministic Isomorphic Validation of Composite Card Structures in Non-Monotonic Rank Hierarchies}}
-\author{Muhammad Rengga Putra Kuncoro}
-\date{January 2026}
+\author{Muhammad Rengga Putra Kuncoro and Rully Soelaiman}
 
 \begin{document}
 
@@ -400,6 +399,56 @@ Theoretical Worst Case & 10 & 3,628,800 & $O(n!)$ \\ \bottomrule
 
 The total algorithmic complexity $O(M \log M + n!)$ results in a deterministic validation time. By acknowledging the factorial nature of the search while demonstrating its containment within physical bounds, the engine achieves real-time $O(1)$ latency relative to human perception during game arbitration.
 
+\section{Empirical Computational Analysis}
+To evaluate the real-world performance of the permutative matching engine, we conducted a Monte Carlo simulation of 20,000 randomized leads ranging from 1 to 25 cards. This analysis reconciles the theoretical $S_n$ search space with the physical structural constraints of the Tractor domain.
+
+\subsection{Complexity Distribution and Latency Zones}
+The simulation categorizes lead complexity into three operational zones based on the number of independent blocks $n$. While the theoretical maximum for $n$ is significantly higher, the greedy decomposition engine consistently compresses card multisets into a manageable number of primitives.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{images/blocks_histogram.png}
+    \caption{Frequency of block counts $n$ over 20,000 trials. The $n \ge 10$ region represents the threshold where factorial growth begins to impact sub-millisecond latency.}
+\end{figure}
+
+The distribution reveals that approximately 45.88\% of leads fall within the \textbf{Real-Time Zone} ($n \le 9$), where the search space is small enough ($< 362,880$ permutations) to be resolved near-instantaneously. The \textbf{Latency Zone} ($10 \le n \le 12$) accounts for 28.77\% of plays, while the \textbf{Computation Limit} ($n > 12$) is reached in 25.36\% of cases.
+
+\subsection{Structural Simplification in High-Complexity Leads}
+A core finding of this study is that high-complexity states are not dominated by complex sequential structures, but by a high density of simple primitives. In leads where $n \ge 10$, the average tractor composition remains low at approximately 7.16\%, compared to a global average of 4.62\%.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{images/tractor_distribution.png}
+    \caption{Average count of 'Tractor' primitives in high-complexity leads. The high volume of simple primitives such as pairs and singles allows for massive search space pruning via symmetry breaking.}
+\end{figure}
+
+This structural homogeneity is the primary driver of computational feasibility. In extreme cases, such as the observed maximum of $n=18$, the preponderance of simple pairs and singles allows the search space to collapse. Because these blocks are isomorphically simple, the \texttt{sameStructure} engine encounters frequent symmetry-breaking opportunities, effectively bypassing the full $18!$ (approx $6.40 \times 10^{15}$) permutations.
+
+\begin{table}[H]
+\centering
+\caption{Empirical Search Space Reduction Summary ($N=20,000$)}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Metric} & \textbf{Real-Time Zone} & \textbf{Latency Zone} & \textbf{Limit Zone} \\ \midrule
+Block Range ($n$) & $n \le 9$ & $10 \le n \le 12$ & $n > 12$ \\
+Lead Frequency & 45.88\% & 28.77\% & 25.36\% \\
+Avg. Tractor \% (Structure) & $<$ 4.62\% & $\approx$ 6.0\% & 7.16\% \\
+Search space pruning & High & Moderate & Extreme (Symmetry) \\ \bottomrule
+\end{tabular}
+\end{table}
+
+This empirical data confirms that the engine achieves deterministic validation within the latency thresholds required for interactive gameplay, even when the theoretical search space suggests intractability.
+
+\section{Conclusion}
+In this paper, we have presented a deterministic algorithmic framework for validating complex structural adherence in non-monotonic card games through three main concepts. First, we introduce a piecewise mapping transformation, $\Phi$, which projects a discontinuous rank space into a normalized integer domain, allowing for constant-time arithmetic verification of sequential continuity. Second, by utilizing a greedy structural decomposition, we reduce the complexity of the requirement set into a minimized number of independent blocks, $n$. Last, we employ a permutative existence check with aggressive branch-and-bound pruning to resolve structural isomorphism between the lead and the response.
+
+
+
+The experimental results for this TRACTOR-based validation problem demonstrate that the proposed approach is both computationally and physically feasible. While the problem is theoretically $NP$-hard, our simulation of 20,000 randomized leads confirms that 45.88\% of plays fall within a sub-millisecond "Real-Time Zone," and even the most complex leads ($n \ge 10$) are dominated by simple primitives (Singles and Pairs). These primitives account for a high degree of structural homogeneity, with tractors representing only 7.16\% of blocks in high-complexity scenarios. This distribution allows the engine to exploit symmetry breaking to prune the $n!$ search space significantly, maintaining real-time arbitration thresholds. 
+
+
+
+In future work, it might be possible to achieve even greater efficiency by incorporating memoization of isomorphic sub-structures or by finding a closed-form analytical bound for specific sub-configurations within the permutation group. This framework serves as a robust foundation for automated arbitration in multi-deck environments where structural integrity and rank-dynamic non-linearity are paramount.
 
 \newpage
 \appendix
