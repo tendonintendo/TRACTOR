@@ -2,6 +2,12 @@
 
 This repository contains the formal mathematical framework and high-performance C++ implementation for validating complex structural plays in multi-deck trick-taking games. 
 
+## Publication Status
+**Current Status:** Under Review  
+**Venue:** IAENG International Journal of Computer Science  
+**Title:** Deterministic Isomorphic Validation of Composite Card Structures in Non-Monotonic Rank Hierarchies  
+**Authors:** Muhammad Rengga Putra Kuncoro, Rully Soelaiman
+
 ## Inspiration
 The core of this research was inspired by the [**SPOJ TRACTOR**](https://www.spoj.com/problems/TRACTOR/) competitive programming problem. The challenge involves resolving structural ambiguity in card plays where simple greedy matching often fails. This project formalizes a robust solution by treating the validation of "Throws" (composite plays) as a problem of isomorphic structural consistency under non-monotonic rank constraints. The provided source code serves as a verified solution to the SPOJ challenge.
 
