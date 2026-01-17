@@ -8,8 +8,6 @@ This repository contains the full, high-performance C++ implementation and forma
 **Title:** Deterministic Isomorphic Validation of Composite Card Structures in Non-Monotonic Rank Hierarchies  
 **Authors:** Muhammad Rengga Putra Kuncoro, Rully Soelaiman
 
-*Note: Per supervisor guidance, the full manuscript is available upon request to maintain peer-review integrity.*
-
 ## The Solution
 The core of this repository, `src/solution.cpp`, is the **complete and verified solution** to the [**SPOJ TRACTOR**](https://www.spoj.com/problems/TRACTOR/) competitive programming problem. 
 
